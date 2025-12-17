@@ -1,0 +1,9 @@
+# AIMO3 Solution Requirements
+
+# Core dependencies
+sympy>=1.12  # For symbolic mathematics
+
+# Optional dependencies for enhanced features
+# These are typically available in Kaggle environment
+# numpy>=1.24.0
+# scipy>=1.10.0

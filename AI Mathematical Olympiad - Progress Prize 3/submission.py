@@ -19,6 +19,15 @@ from aimo3_solution.answer_extractor import AnswerExtractor
 from aimo3_solution.engine_breeder import EngineBreeder
 from aimo3_solution.utils import setup_logging, create_submission_csv
 
+# Try to import MathOlympiadAGI
+try:
+    from aimo3_solution.math_olympiad_agi import MathOlympiadAGI
+    MATH_OLYMPIAD_AGI_AVAILABLE = True
+except ImportError:
+    MATH_OLYMPIAD_AGI_AVAILABLE = False
+    logger_temp = logging.getLogger(__name__)
+    logger_temp.warning("MathOlympiadAGI not available, using fallback")
+
 
 # Setup logging
 logger = setup_logging(log_file='aimo3_submission.log', level=logging.INFO)
@@ -27,6 +36,21 @@ logger = setup_logging(log_file='aimo3_submission.log', level=logging.INFO)
 def load_best_engine_config(config: Config) -> Dict:
     """Load the best trained engine configuration"""
     import json
+    
+    # Try to load from MathOlympiadAGI first
+    agi_path = os.path.join(config.trained_engines_dir, 'math_olympiad_agi.json')
+    
+    if os.path.exists(agi_path) and MATH_OLYMPIAD_AGI_AVAILABLE:
+        logger.info(f"Loading MathOlympiadAGI from {agi_path}")
+        try:
+            math_agi = MathOlympiadAGI(config)
+            math_agi.load(config.trained_engines_dir)
+            engine_config = math_agi.get_best_engine_config()
+            if engine_config:
+                logger.info(f"Using trained MathOlympiadAGI engine: {engine_config['name']}")
+                return engine_config
+        except Exception as e:
+            logger.warning(f"Failed to load MathOlympiadAGI: {e}")
     
     # Try to load best engine from trained_engines
     engine_path = os.path.join(config.trained_engines_dir, 'best_engine.json')
