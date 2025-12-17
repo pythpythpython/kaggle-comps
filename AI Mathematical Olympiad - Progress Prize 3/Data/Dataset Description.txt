@@ -1,0 +1,151 @@
+Skip to
+content
+Kaggle
+
+Create
+Home
+
+Competitions
+
+Datasets
+
+Models
+
+Benchmarks
+
+Game Arena
+
+Code
+
+Discussions
+
+Learn
+
+More
+
+Your Work
+
+
+Viewed
+
+AI Mathematical Olympiad - Progress Prize 3
+
+
+ARC Prize 2025
+
+
+Jigsaw - Agile Community Rules Classification
+
+
+OLD JIGSAW competition
+
+
+deberta-v3-small-offline
+
+
+Edited
+
+notebook14a1afddab
+
+
+notebook7e764f8afa
+
+
+SRS_Master
+
+
+SRS Shield-and-Rebuild — Baseline (calibrated
+
+
+View Active Events
+
+Search
+
+Kaggle uses cookies from Google to deliver and enhance the quality of its services and to analyze traffic.
+Learn more
+OK, Got it.
+AI|MO · Featured Code Competition · 4 months to go
+
+Join Competition
+AI Mathematical Olympiad - Progress Prize 3
+Solve international-level math challenges using artificial intelligence models
+
+
+Dataset Description
+The competition data comprises 110 mathematics problems similar in style to those of the AIME.
+
+The answer to each problem is a non-negative integer between 0 and 99999, inclusive.
+
+You should expect the problems to be roughly ranging in difficulty from a national Olympiad to the International Mathematical Olympiad (IMO), with some problems being slightly easier and some being slightly harder.
+
+All problems are text-only with mathematical notation in LaTeX. Please see the Overview, Section Note on Language and Notation for details on the notational conventions used.
+
+Although some problems may involve geometry, diagrams are not used in any problem.
+
+The public test set comprises exactly 50 problems, and the private test set comprises a further distinct set of 50 problems. We also provide a selection of 10 problems for use as reference, called "reference data". A pdf with full solutions to the problems from the reference data can be found below. The problems in the private and public sets have been selected to balance both difficulty and subject area. Their difficulty and subject distribution is similar.
+
+Competition Data
+Please note that this is a Code Competition. You must submit to this competition using the provided Python evaluation API, which serves the test set question by question in random order. To use the API, follow the example in this notebook: AIMO 3 Submission Demo.
+
+We give a few placeholder problems in the publicly visible test.csv file to help you author your submissions. These problems are not representative of the problems in the actual test set.
+
+When your submission is scored, this placeholder test data will be replaced with the actual test data.
+
+Private Set Rerun
+Because of the limited number of problems available, we are taking special precautions to secure the test set against probing. Among other things, during the submission period, the test set will comprise only the 50 public set problems. Once the competition ends, we will rerun all model submissions twice on the 50 private set problems. The overall score is an average accuracy score as described on the Evaluation page. You should attempt to make sure your submission will complete successfully on the 50 new private set problems. This may mean ensuring your submission is robust to unexpected inputs, or managing runtime and memory usage. A submission must complete successfully on both private set reruns or it will not be scored.
+
+Files
+reference.csv - Contains 10 problems for use as reference data.
+test.csv - Contains 50 problems. Please note that the problems visible here are only placeholders. Your submission will have access to the full set of problems during scoring.
+sample_submission.csv - A sample submission file in the correct format. See the Evaluation page for more information on the submission format.
+Fields
+id - A unique identifier for each problem.
+problem - A LaTeX statement of the problem to be solved.
+answer - An integer from 0 to 99999, inclusive.
+Files
+15 files
+
+Size
+741.26 kB
+
+Type
+py, csv, pdf + 1 other
+
+License
+CC BY-SA 4.0
+
+AIMO3_Reference_Problems.pdf(676.7 kB)
+Competition Rules
+
+
+To see this data you need to agree to the competition rules.
+Join the competition to view the data.
+
+
+Join the competition
+Data Explorer
+741.26 kB
+
+kaggle_evaluation
+
+AIMO3_Reference_Problems.pdf
+
+reference.csv
+
+sample_submission.csv
+
+test.csv
+
+Summary
+15 files
+
+7 columns
+
+
+Download All
+kaggle competitions download -c ai-mathematical-olympiad-progress-prize-3
+Download data
+
+Metadata
+License
+CC BY-SA 4.0
