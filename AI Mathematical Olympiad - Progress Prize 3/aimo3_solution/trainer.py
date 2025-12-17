@@ -59,6 +59,7 @@ class Trainer:
                 self.reference_problems.append(problem)
         
         self.logger.info(f"Loaded {len(self.reference_problems)} reference problems")
+        return self.reference_problems
     
     def generate_synthetic_problems(
         self,

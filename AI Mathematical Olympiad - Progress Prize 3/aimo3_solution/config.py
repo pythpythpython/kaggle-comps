@@ -11,6 +11,26 @@ from typing import List, Dict, Any
 class Config:
     """Configuration class for AIMO3 solution"""
     
+    def __post_init__(self):
+        """Initialize paths relative to the config file location"""
+        # Get the directory containing this config file
+        config_dir = os.path.dirname(os.path.abspath(__file__))
+        project_dir = os.path.dirname(config_dir)
+        
+        # Update paths to be absolute
+        if not os.path.isabs(self.data_dir):
+            self.data_dir = os.path.join(project_dir, "Data")
+        if not os.path.isabs(self.reference_csv):
+            self.reference_csv = os.path.join(project_dir, "Data", "reference.csv")
+        if not os.path.isabs(self.test_csv):
+            self.test_csv = os.path.join(project_dir, "Data", "test.csv")
+        if not os.path.isabs(self.sample_submission_csv):
+            self.sample_submission_csv = os.path.join(project_dir, "Data", "sample_submission.csv")
+        if not os.path.isabs(self.trained_engines_dir):
+            self.trained_engines_dir = os.path.join(project_dir, "trained_engines")
+        if not os.path.isabs(self.training_data_dir):
+            self.training_data_dir = os.path.join(project_dir, "training_data")
+    
     # Paths
     data_dir: str = "../Data"
     reference_csv: str = "../Data/reference.csv"
