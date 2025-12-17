@@ -50,8 +50,54 @@ class EngineBreeder:
         self.config = config
         self.logger = logging.getLogger(__name__)
         
-        # Base engines from Work submodule (gen4_rankings.json)
-        self.base_engines = {
+        # Load base engines from Work submodule gen4_rankings.json
+        self.base_engines = self._load_gen4_engines()
+        
+        self.bred_engines = []
+    
+    def _load_gen4_engines(self) -> Dict[str, EngineCapabilities]:
+        """Load Gen-4 engines from Work submodule"""
+        try:
+            # Find gen4_rankings.json in Work submodule
+            config_dir = os.path.dirname(os.path.abspath(__file__))
+            project_dir = os.path.dirname(config_dir)
+            gen4_path = os.path.join(
+                os.path.dirname(project_dir),
+                'submodules',
+                'Work',
+                'gen4_rankings.json'
+            )
+            
+            if os.path.exists(gen4_path):
+                with open(gen4_path, 'r') as f:
+                    data = json.load(f)
+                
+                engines = {}
+                for engine_data in data.get('engines', []):
+                    caps = engine_data['capabilities']
+                    engines[engine_data['name']] = EngineCapabilities(
+                        name=engine_data['name'],
+                        quality=engine_data['quality'],
+                        language_parsing=caps['language_parsing'],
+                        knowledge=caps['knowledge'],
+                        planning=caps['planning'],
+                        reasoning=caps['reasoning'],
+                        theorem_proving=caps['theorem_proving'],
+                    )
+                
+                self.logger.info(f"Loaded {len(engines)} engines from {gen4_path}")
+                return engines
+            else:
+                self.logger.warning(f"gen4_rankings.json not found at {gen4_path}, using defaults")
+                return self._get_default_engines()
+                
+        except Exception as e:
+            self.logger.error(f"Failed to load gen4_rankings.json: {e}")
+            return self._get_default_engines()
+    
+    def _get_default_engines(self) -> Dict[str, EngineCapabilities]:
+        """Get default engine configurations as fallback"""
+        return {
             "LinguaChart-G4-G3-192": EngineCapabilities(
                 name="LinguaChart-G4-G3-192",
                 quality=0.9928,
@@ -88,18 +134,7 @@ class EngineBreeder:
                 reasoning=0.85,
                 theorem_proving=0.5
             ),
-            "MathTheoremProver": EngineCapabilities(
-                name="MathTheoremProver",
-                quality=0.9850,
-                language_parsing=0.6,
-                knowledge=0.8,
-                planning=0.7,
-                reasoning=0.9,
-                theorem_proving=1.0
-            ),
         }
-        
-        self.bred_engines = []
     
     def select_top_engines(self, n: int = 4) -> List[EngineCapabilities]:
         """
